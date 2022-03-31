@@ -50,10 +50,10 @@ def generate_spectogram(voice):
 
     voice = voice.split('/')[-1]
 
-    fig.savefig('C:/Users/yanaz/Documents/Yana s things/programming/AACodeVoice/get_img/img1.png')
-    p = 'C:/Users/yanaz/Documents/Yana s things/programming/AACodeVoice/get_img/img1.png'
+    fig.savefig('C:/Users/pic.png')
+    path = 'C:/Users/pic.png'
     plt.clf()
-    return p
+    return path
 
 
 
