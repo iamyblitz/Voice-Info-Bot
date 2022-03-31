@@ -18,9 +18,9 @@ from tensorflow.python.keras.layers import Activation, Dropout, Flatten, Dense
 import tensorflow as tf
 import numpy as np
 
-token = '1840603958:AAHYjyuGKnfIFlEmclpx-9agQywzI3Cpj-I'
+token = 'ppppp'
 
-bot = telebot.TeleBot("1840603958:AAHYjyuGKnfIFlEmclpx-9agQywzI3Cpj-I", parse_mode=None)
+bot = telebot.TeleBot("ppppp", parse_mode=None)
 
 logfile = str(datetime.date.today()) + '.log' # формируем имя лог-файла
 
@@ -64,8 +64,7 @@ def get_audio_messages(message):
         file_info = bot.get_file(message.voice.file_id)
         path = os.path.splitext(file_info.file_path)[0]
         fname = os.path.basename(path)
-        doc = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(token, file_info.file_path)) #Получаем и сохраняем присланную голосвуху (Ага, админ может в любой момент отключить удаление айдио фай
-        with open(fname+'.ogg', 'wb') as f:
+        doc = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(token, file_info.file_path)) 
             f.write(doc.content) # вот именно тут и сохраняется сама аудио-мессага
         process = subprocess.run(['ffmpeg', '-i', fname+".ogg", fname+'.wav'])
         result = audio_to_text(fname+'.wav')
@@ -88,8 +87,9 @@ def get_audio_messages(message):
         with open(logfile, 'a', encoding='utf-8') as f:
             f.write(str(datetime.datetime.today().strftime("%H:%M:%S")) + ':' + str(message.from_user.id) + ':' + str(message.from_user.first_name) + '_' + str(message.from_user.last_name) + ':' + str(message.from_user.username) +':'+ str(message.from_user.language_code) +':' + str(e) + '\n')
     finally:
-        # В любом случае удаляем временные файлы с аудио сообщением
+        #удаляем временные файлы с аудио сообщением
         os.remove(fname+'.ogg')
+        os.rempve(fname+'.wav')
 
 
 
